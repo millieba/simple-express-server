@@ -3,11 +3,13 @@ import express, { Request, Response } from "express";
 const app = express();
 const port = 8080;
 
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({ message: "Hello World 🗺️" });
-});
-
-app.get("/timeUntil", (req: Request, res: Response) => {
+/*
+ * Handler function for /timeuntil endpoint.
+ * Expects two query parameters: dueDate and startDate, both Date objects.
+ * Returns the time remaining until the due date, along with the current progress perecentage.
+ * Example usage: /timeuntil?dueDate=2024-06-14&startDate=2024-01-19
+ */
+function timeUntilHandler(req: Request, res: Response) {
   try {
     const currentDate = new Date();
     const { dueDate, startDate } = req.query;
@@ -39,7 +41,13 @@ app.get("/timeUntil", (req: Request, res: Response) => {
     console.error("An error occurred while calculating time left: ", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
+}
+
+app.get("/", (req: Request, res: Response) => {
+  res.status(200).json({ message: "Hello World 🗺️" });
 });
+
+app.get("/timeuntil", timeUntilHandler);
 
 app.listen(port, () => {
   console.log(`🎉 Server listening on port ${port}.`);
