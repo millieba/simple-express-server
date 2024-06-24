@@ -4,10 +4,10 @@ Creates a simple TypeScript server with a REST API using Express, along with two
 ## Initialise project
 Create a GitHub repo, clone it and run:
 ```bash
-pnpm init
-mkdir src
-type nul > src/server.ts
-pnpm add express typescript @types/node @types/express
+pnpm init;
+mkdir src;
+type nul > src/server.ts;
+pnpm add express typescript @types/node @types/express;
 ```
 
 Add a `.gitignore` file:
